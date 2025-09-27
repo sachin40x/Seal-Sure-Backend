@@ -26,9 +26,10 @@ const signup = async (req, res) => {
         console.log('User created successfully:', user._id);
 
         // Generate JWT token
+        const jwtSecret = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-this-in-production-sealsure-2024';
         const token = jwt.sign(
             { userId: user._id, username: user.username },
-            process.env.JWT_SECRET,
+            jwtSecret,
             { expiresIn: '1h' } // Token expires in 1 hour
         );
 
@@ -67,9 +68,10 @@ const signin = async (req, res) => {
         }
 
         // Generate JWT token
+        const jwtSecret = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-this-in-production-sealsure-2024';
         const token = jwt.sign(
             { userId: user._id, username: user.username },
-            process.env.JWT_SECRET,
+            jwtSecret,
             { expiresIn: '1h' }
         );
 
