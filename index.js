@@ -45,13 +45,19 @@ app.use('/api/analytics', analyticsRouter); // Mount the analytics router
 app.use('/api/uploads', express.static('uploads'));
 app.use('/api/outputs', express.static('outputs'));
 
-mongoose.connect(process.env.MONGO_URL)
-    .then(() => console.log("✅ Mongoose is connected to MongoDB"))
-    .catch((err) => {
-        console.log("❌ Error in connecting Mongoose:", err);
+// MongoDB connection with better error handling
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URL);
+        console.log("✅ MongoDB connected successfully");
+    } catch (error) {
+        console.log("❌ MongoDB connection failed:", error.message);
         console.log("MONGO_URL:", process.env.MONGO_URL);
-        process.exit(1); // Exit if database connection fails
-    });
+        process.exit(1);
+    }
+};
+
+connectDB();
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);  // Correct the string format
