@@ -17,7 +17,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: PYTHON_SERVICE_URL
-        value: https://your-python-api-url.onrender.com
+        value: https://seal-sure-api-1.onrender.com
 
 databases:
   - name: sealsure-db
