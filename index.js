@@ -16,8 +16,7 @@ const PORT = process.env.PORT || 5000;
 // Use cors middleware
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://your-netlify-app.netlify.app', // Replace with your actual Netlify URL
-    'https://seal-sure-frontend.netlify.app', // Add your actual Netlify URL here
+    'https://sealsure.netlify.app', // Your actual Netlify frontend URL
     process.env.FRONTEND_URL
 ];
 
