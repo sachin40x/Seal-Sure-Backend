@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: sealsure-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URL
+        fromDatabase:
+          name: sealsure-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PYTHON_SERVICE_URL
+        value: https://your-python-api-url.onrender.com
+
+databases:
+  - name: sealsure-db
+    plan: free
+    databaseName: sealsure
