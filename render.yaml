@@ -15,7 +15,7 @@ services:
           name: sealsure-db
           property: connectionString
       - key: JWT_SECRET
-        generateValue: true
+        value: "your-super-secret-jwt-key-change-this-in-production-sealsure-2024"
       - key: PYTHON_SERVICE_URL
         value: https://seal-sure-api-1.onrender.com
 
