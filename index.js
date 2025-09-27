@@ -16,7 +16,8 @@ const PORT = process.env.PORT || 5000;
 // Use cors middleware
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://your-netlify-app.netlify.app', // Replace with your Netlify URL
+    'https://your-netlify-app.netlify.app', // Replace with your actual Netlify URL
+    'https://seal-sure-frontend.netlify.app', // Add your actual Netlify URL here
     process.env.FRONTEND_URL
 ];
 
@@ -36,6 +37,16 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({ 
+        status: 'OK', 
+        message: 'Backend API is running',
+        timestamp: new Date().toISOString()
+    });
+});
+
 app.use('/api', userRouter); // Correctly mount the user router
 app.use('/api', detectRouter); // Mount the detect router
 app.use('/api/documents', documentRouter); // Mount the document router
