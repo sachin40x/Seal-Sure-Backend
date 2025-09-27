@@ -51,17 +51,23 @@ app.use('/api/outputs', express.static('outputs'));
 // MongoDB connection with better error handling
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URL);
+        const mongoUrl = process.env.MONGO_URL || 'mongodb+srv://sachinacz15_db_user:Sachin%409145@cluster0.amfz3ti.mongodb.net/sealsure_db?retryWrites=true&w=majority';
+        console.log("Connecting to MongoDB...");
+        await mongoose.connect(mongoUrl);
         console.log("✅ MongoDB connected successfully");
     } catch (error) {
         console.log("❌ MongoDB connection failed:", error.message);
         console.log("MONGO_URL:", process.env.MONGO_URL);
-        process.exit(1);
+        console.log("Using fallback URL...");
+        // Don't exit, let server start with fallback
     }
 };
 
-connectDB();
+const startServer = async () => {
+    await connectDB();
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+};
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);  // Correct the string format
-});
+startServer();
