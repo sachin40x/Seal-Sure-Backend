@@ -47,7 +47,10 @@ app.use('/api/outputs', express.static('outputs'));
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log("Mongoose is connected"))
-    .catch((err) => console.log("Error in connecting Mongoose:", err));
+    .catch((err) => {
+        console.log("Error in connecting Mongoose:", err);
+        process.exit(1); // Exit if database connection fails
+    });
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);  // Correct the string format
