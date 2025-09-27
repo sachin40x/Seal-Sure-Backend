@@ -46,9 +46,10 @@ app.use('/api/uploads', express.static('uploads'));
 app.use('/api/outputs', express.static('outputs'));
 
 mongoose.connect(process.env.MONGO_URL)
-    .then(() => console.log("Mongoose is connected"))
+    .then(() => console.log("✅ Mongoose is connected to MongoDB"))
     .catch((err) => {
-        console.log("Error in connecting Mongoose:", err);
+        console.log("❌ Error in connecting Mongoose:", err);
+        console.log("MONGO_URL:", process.env.MONGO_URL);
         process.exit(1); // Exit if database connection fails
     });
 
